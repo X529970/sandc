@@ -1,1 +1,7 @@
 This is the homework assignment as developed and eventually completed by Storm Holloway and Charissa Smith.
+
+We chose to model a restaurant. The three specific elements we focussed on are the Waiter, the Chef and the Customer.
+
+The first object we modeled is the Waiter.
+
+At some point we will look at the interactions between the three, but that is currently beyond our level of understanding.
