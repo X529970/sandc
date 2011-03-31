@@ -2,7 +2,7 @@ require 'minitest/autorun'
 require 'rake/testtask'
 
 
-require File.expand_path'lib/restaurant.rb'
+require File.expand_path 'lib/restaurant.rb'
 require File.expand_path 'test/restaurant_test.rb'
 
 
