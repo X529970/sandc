@@ -1,13 +1,10 @@
 Feature: provide meal
-	Client orders dinner
+	Background:
+	In order to provide a fine dining experience
+	Potential customers should be able to order, eat and pay for a meal from the menu
 	
-	Scenario: Customer orders flanksteak
-		customer orders flanksteak
-		waiter checks the menu 
-		waiter tells customer it is not on the menu
-		customer orders something else
-		
-	Scenario: customer orders pizza
+
+	Scenario: customer orders something from the menu
 		customer orders pizza
 		waiter checks menu
 		waiter places order with chef
@@ -19,4 +16,17 @@ Feature: provide meal
 		customer pays
 		customer leaves
 		
+	Scenario: Customer orders something not on the menu
+		customer orders flanksteak
+		waiter checks the menu 
+		waiter tells customer it is not on the menu
+		customer orders something else
+	
+	Scenario: Customer orders something not on the menu
+		customer orders flanksteak
+		waiter checks the menu 
+		waiter tells customer it is not on the menu
+		customer had heart set on flanksteak 
+		customer leaves
+
 		

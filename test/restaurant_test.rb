@@ -5,6 +5,7 @@ describe Waiter do
   
   it 'should only accept order on menu' do
     assert Waiter.new.take_order(:pizza)
+        refute Waiter.new.take_order(1)
     assert !Waiter.new.take_order(:flanksteak)
   end
   
