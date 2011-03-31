@@ -4,9 +4,9 @@ class Waiter
   def initialize
   end
   
+# check item on menu
   def take_order(item)
      !$menu[item].nil?
-   # check item on menu
   end
   
   def place_order
@@ -25,9 +25,6 @@ class Waiter
   
   def take_money
   end
-  
-  
-  
 end
 
 
