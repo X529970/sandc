@@ -4,7 +4,6 @@ describe Waiter do
   end
   
   it 'should only accept order on menu' do
-    puts Waiter.new.take_order("pizza")
     assert Waiter.new.take_order(:pizza)
     assert !Waiter.new.take_order(:flanksteak)
   end
@@ -19,6 +18,7 @@ describe Waiter do
   
   it 'should greet customer' do
     assert_respond_to Waiter.new, :greet
+    refute_nil Waiter.new.greet
   end
   
   
@@ -29,5 +29,46 @@ describe Waiter do
     assert_respond_to Waiter.new, :take_money
   end
 
+  
+end
+
+
+describe Customer do
+it ' should order something to eat' do
+  assert_respond_to Customer.new, :order
+end
+
+it' should eat the food' do
+ assert_respond_to Customer.new, :eat
+ end
+ 
+  
+it 'should pay the bill'do
+assert_respond_to Customer.new, :pay
+end
+
+  
+it "should leave after eating" do 
+  assert_respond_to Customer.new, :leave
+  end
+  
+end
+
+describe Chef do
+ it 'should cook the item ordered' do
+   assert_respond_to Chef.new, :cook
+  end
+  
+it 'should prepare ingrediants'do
+ assert_respond_to Chef.new, :prepare
+ end
+  
+  it 'should manage multiple orders' do
+  assert_respond_to Chef.new, :manage
+  # not sure about this one...
+end
+it 'should ready an order' do
+  assert_respond_to Chef.new, :ready_order
+  end
   
 end
