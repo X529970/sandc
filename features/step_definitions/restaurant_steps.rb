@@ -1,13 +1,15 @@
+require '~/documents/ruby/sandc/lib/restaurant.rb'
+
 Given /^there is a customer$/ do
-  refute_nil @c=Customer.new # express the regexp above with the code you wish you had
+   @c=Customer.new # express the regexp above with the code you wish you had
 end
 
 When /^I go to his table$/ do
-  refute_nil @w=Waiter.new # not quite but it will do for now...
+   @w=Waiter.new # not quite but it will do for now...
 end
 
 Then /^I greet him$/ do
- refute_nil @w.greet # express the regexp above with the code you wish you had 
+  @w.greet # express the regexp above with the code you wish you had 
 end
 
 Then /^he responds positively$/ do
