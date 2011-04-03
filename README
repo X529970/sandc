@@ -5,3 +5,17 @@ We chose to model a restaurant. The three specific elements we focussed on are t
 The first object we modeled is the Waiter.
 
 At some point we will look at the interactions between the three, but that is currently beyond our level of understanding.
+
+Some things to note:
+To get minitest to be available to the step definitions we had to:
+- create a support directory under features
+- add an env.rb file to the support directory with these lines
+	require 'minitest/autorun'
+	World(MiniTest::Assertions)
+	
+To have cucumber find the .rb files in lib, we had to:
+- create a loader.rb file in lib with these lines:
+	ROOT= File.expand_path './'
+	require File.join ROOT, 'lib', 'xxxx.rb', xxxx is the .rb file to require, can later make this all .rb files in lib except loader.rb
+- add this line to env.rb
+	require File.join "./" ,"lib" ,"loader.rb"

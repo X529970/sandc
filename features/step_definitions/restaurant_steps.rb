@@ -1,4 +1,4 @@
-require '~/documents/ruby/sandc/lib/restaurant.rb' # there must be a more appropriate way to require this...
+#require '~/documents/ruby/sandc/lib/restaurant.rb' # there must be a more appropriate way to require this...
 
 Before do
   @w=Waiter.new
@@ -7,7 +7,7 @@ Before do
 end
 
 Given /^there is a customer$/ do
-   !@c.nil?# express the regexp above with the code you wish you had
+   assert @c# express the regexp above with the code you wish you had
 end
 
 When /^I go to his table$/ do
