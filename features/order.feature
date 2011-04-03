@@ -5,28 +5,31 @@ Feature: provide meal
 	
 
 	Scenario: customer orders something from the menu
-		customer orders pizza
-		waiter checks menu
-		waiter places order with chef
-		chef cooks pizza
-		chef readies order
-		waiter delivers order
-		customer eats pizza
-		waiter gives check
-		customer pays
-		customer leaves
+		Given customer orders pizza
+		When waiter checks menu 
+		And its there
+		Then waiter places order with chef
+		And chef cooks pizza
+		And chef readies order
+		And waiter delivers order
+		And customer eats pizza
+		And waiter gives check
+		And customer pays
+		And customer leaves
 		
 	Scenario: Customer orders something not on the menu
-		customer orders flanksteak
-		waiter checks the menu 
-		waiter tells customer it is not on the menu
-		customer orders something else
+		Given customer orders flanksteak
+		When waiter checks menu
+		And  its not there
+		Then waiter tells customer it is not on the menu
+		And customer orders something else
 	
 	Scenario: Customer orders something not on the menu
-		customer orders flanksteak
-		waiter checks the menu 
-		waiter tells customer it is not on the menu
-		customer had heart set on flanksteak 
-		customer leaves
+		Given customer orders flanksteak
+		When waiter checks menu
+		And its not there
+		Then waiter tells customer it is not on the menu
+		And customer had heart set on flanksteak 
+		And customer leaves
 
 		

@@ -1,7 +1,11 @@
-# ~/.rvm/rubies/ruby-1.9.2-p180/bin/ruby
+
 
 $menu={pizza: 10.49, pasta: 8.86, porkjowl: 13.00, persimmons: 6.00, potatosalad: 7.50, plankton: 5.00, parsley: 0.50}
-$badgreet=['Wadda you want?','Chill. I will be back soon to take your order.']
+$moods={'grumpy'=>0,'indifferent'=>0.10,'happy'=>0.15,'very happy'=>0.20}
+$greetings={'Hello, My name is Bob. How can I serve you today?'=> 1,
+            'Wadda you want?'=>-1,
+            'Chill. I will be back soon to take your order.'=>-1,
+            'Sup? What can I get for your supper?'=>0}
 
 class Waiter
   def initialize
@@ -19,11 +23,11 @@ class Waiter
   end
   
   def greet
-  msg=['Hello, My name is Bob. How can I serve you today?','Wadda you want?','Chill. I will be back soon to take your order.','Sup? What can I get for your supper?']
-  msg[rand(msg.length)]
+    $greetings.keys[rand($greetings.length)]
   end
   
-  def deliver_check
+  def deliver_check (customer)
+    customer.order.cost
   end
   
   def take_money
@@ -32,15 +36,21 @@ end
 
 
 class Customer
-  attr_accessor :tip
-  attr_reader :order
+  attr_accessor :tip 
+  attr_reader :order, :mood
   
   def initialize
     @tip=0
-    @order=Order.new
+    @mood=$moods.keys[rand($moods.length)]  
   end
   
-  def order=(item)
+  def react (greeting)
+    # can't be too happy or unhappy
+    @mood=$moods.keys[[[$moods.keys.find_index(@mood)+$greetings[greeting],0].max,$moods.length-1].min]
+  end
+  
+  def request_order(item)
+    @order=Order.new if @order.nil?
     @order.order(item)
   end
   
@@ -48,12 +58,12 @@ class Customer
   end
   
   def pay
-  @tip= [0, 0.1, 0.15,0.20][@happy]
+  @tip= $moods[@mood]
   (1+@tip)*@order.cost 
   end
   
   def leave
- # @tip<0.15*@order.cost ? "I'm never coming here again" : "Let's have a party here next weekend with all our friends"
+  (@tip<0.15) ? "I'm never coming here again" : "Let's have a party here next weekend with all our friends"
   end
 end
 
@@ -87,7 +97,7 @@ class Order
   def cost
     # i imagine there is a better way to do this...
     c=0
-   @order.each {|v|  c+=$menu[v] if !$menu[v].nil?} if !@order.nil?
+   @order.each {|v|  c+=$menu.fetch(v,0)} if !@order.nil?
    c
   end
 end
