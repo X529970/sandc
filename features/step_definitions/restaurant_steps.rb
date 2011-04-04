@@ -7,11 +7,7 @@ Before do
 end
 
 Given /^there is a customer$/ do
-   assert @c# express the regexp above with the code you wish you had
-end
-
-When /^I go to his table$/ do
-  # express the regexp above with the code you wish you had
+   assert @c
 end
 
 Then /^I greet him$/ do
@@ -36,8 +32,8 @@ Then /^leaves a bad tip$/ do
   # express the regexp above with the code you wish you had
 end
 
-Given /^customer orders pizza$/ do
-  @c.request_order(:pizza) # express the regexp above with the code you wish you had
+Given /^customer orders "(.*)"$/ do |arg1|
+  @c.request_order(arg1) # express the regexp above with the code you wish you had
 end
 
 When /^waiter checks menu$/ do
@@ -49,6 +45,11 @@ When /^its there$/ do
 end
 
 Then /^waiter places order with chef$/ do
+ # express the regexp above with the code you wish you had
+end
+
+
+Then /^chef cooks "(.*)"$/ do |arg1|
   # express the regexp above with the code you wish you had
 end
 
@@ -64,8 +65,8 @@ Then /^waiter delivers order$/ do
   # express the regexp above with the code you wish you had
 end
 
-Then /^customer eats pizza$/ do
- # express the regexp above with the code you wish you had
+Then /^customer eats "(.*)"$/ do |arg1|
+  # express the regexp above with the code you wish you had
 end
 
 Then /^waiter gives check$/ do
@@ -80,14 +81,6 @@ Then /^customer leaves$/ do
    # express the regexp above with the code you wish you had
 end
 
-Given /^customer orders flanksteak$/ do
-  @c.request_order(:flanksteak) # express the regexp above with the code you wish you had
-end
-
-#When /^waiter checks the menu$/ do
- # pending # express the regexp above with the code you wish you had
-#end
-
 When /^its not there$/ do
    # express the regexp above with the code you wish you had
 end
@@ -99,7 +92,26 @@ end
 Then /^customer orders something else$/ do
   @c.request_order(:pizza) # maybe we should remove the bad thing from the order...express the regexp above with the code you wish you had
 end
-
-Then /^customer had heart set on flanksteak$/ do
+Then /^customer had heart set on "(.*)"$/ do |arg1|
  # express the regexp above with the code you wish you had
 end
+
+Given /^there is a customer who is "(.*)"$/ do |arg1|
+   # express the regexp above with the code you wish you had
+   # I wish I knew how to mock and could create a fake customer with a specific mood
+   # but since I don;t know how to do that and don't want to spend hours figuring it out
+   # since there are not a lot of great examples out there or useful documentation
+   # I added a setter for mood (bad idea) just so I can run this test....
+   @c.mood=arg1
+end
+
+When /^I greet him with "(.*)"$/ do |arg1|
+  @ww=MiniTest::Mock.new
+  @ww.expect(:greet, arg1)
+end
+
+Then /^he is "(.*)"$/ do |arg1|
+  @c.react(@ww.greet)
+  assert_equal arg1, @c.mood, "wrong mood" # express the regexp above with the code you wish you had
+end
+

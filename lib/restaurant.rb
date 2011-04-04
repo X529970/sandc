@@ -16,10 +16,10 @@ class Waiter
      !$menu[item].nil?
   end
   
-  def place_order
+  def place_order(order)
   end
   
-  def serve_order
+  def serve_order(order)
   end
   
   def greet
@@ -36,8 +36,8 @@ end
 
 
 class Customer
-  attr_accessor :tip 
-  attr_reader :order, :mood
+  attr_accessor :mood # don't really want mood up here - need it for testing
+  attr_reader :order, :mood, :tip
   
   def initialize
     @tip=0
