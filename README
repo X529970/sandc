@@ -22,7 +22,7 @@ To have cucumber find the .rb files in lib, we had to:
 	
 	
 Here is the gist of what we have modelled (result of running lib/restaurant_app.rb). If you try to run it yourself you will likely get a different
-result. Becareful because the 'require' assumes you are in the lib/ directory when you run it. I still haven't ficured out the best way to make these 
+result. Be careful because the 'require' assumes you are in the lib/ directory when you run it. I still haven't figured out the best way to make these 
 references...
 
 
@@ -60,7 +60,7 @@ changes on a dime. For example, here is what he said to the last 10 customers:
         Chill. I will be back soon to take your order.
 
 But Bob is not the only moody one. Each customer when they enter the restaurant comes in
-bearing the goodness or badness of their day. Today we have 5 customers and here are their
+bearing the goodness or badness of their day. Today we have 4 customers and here are their
 moods:
           happy
           very happy
