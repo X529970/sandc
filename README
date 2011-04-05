@@ -19,3 +19,64 @@ To have cucumber find the .rb files in lib, we had to:
 	require File.join ROOT, 'lib', 'xxxx.rb', xxxx is the .rb file to require, can later make this all .rb files in lib except loader.rb
 - add this line to env.rb
 	require File.join "./" ,"lib" ,"loader.rb"
+	
+	
+Here is the gist of what we have modelled (result of running lib/restaurant_app.rb). If you try to run it yourself you will likely get a different
+result. Becareful because the 'require' assumes you are in the lib/ directory when you run it. I still haven't ficured out the best way to make these 
+references...
+
+
+ruby-1.9.2-p180 :203 > load './restaurant_app.rb'
+Welcome to SandC's Fine New Restaurant.
+We have an extensive menu, although we only serve foods that start with the letter P.
+
+pizza             $10.49
+pasta             $ 8.86
+porkjowl          $13.00
+persimmons        $ 6.00
+potatosalad       $ 7.50
+plankton          $ 5.00
+parsley           $ 0.50
+
+
+Currently we only have one waiter whose name is Bob. We tried to hire someone named Paul
+to fit with our P-themed restaurant, but we were concerned that Bob may bring suit as
+he was clearly the better candidate. 
+
+Bob's only weakness is that he is a bit volitile -- in fact perhaps a bit manic depressive.
+When he greets a customer he says something different depending on his current mood -- which 
+changes on a dime. For example, here is what he said to the last 10 customers:
+
+        Hello, My name is Bob. How can I serve you today?
+        Sup? What can I get for your supper?
+        Wadda you want?
+        Sup? What can I get for your supper?
+        Wadda you want?
+        Chill. I will be back soon to take your order.
+        Chill. I will be back soon to take your order.
+        Chill. I will be back soon to take your order.
+        Wadda you want?
+        Hello, My name is Bob. How can I serve you today?
+        Chill. I will be back soon to take your order.
+
+But Bob is not the only moody one. Each customer when they enter the restaurant comes in
+bearing the goodness or badness of their day. Today we have 5 customers and here are their
+moods:
+          happy
+          very happy
+          happy
+          indifferent
+
+Hopefully their experience in our restaurant will positively alter their mood, cause them to
+leave a good tip and to come back later with all of their friends. Unfortunatly with Bob's
+volatility, we cant be so confident of that result. Lets take a look at our first customer's
+experience:
+
+  He comes in feeling happy
+  Bob greets him with: Wadda you want?
+  After this his mood is indifferent.  Our customer orders a few things from the menu.
+  He is hoping to enjoy  pizza, plankton, potatosalad.
+  After enjoying his fine meal, he gets the check and calculates a tip.
+  His meal costs $22.99 and he decides to leave a tip of 10%
+  He leaves the restaurant with the following thought- I'm never coming here again
+

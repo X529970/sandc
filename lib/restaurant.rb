@@ -86,9 +86,15 @@ class Chef
 end
 
 class Order
-  attr_reader :order
+# something funky going on with the names in here. too many 'orders'
+# probably not a good practice- can cause confusion...
+# refactor later.
   def initialize
     @order =[]
+  end
+  
+  def items
+    @order
   end
 
   def order(item)
