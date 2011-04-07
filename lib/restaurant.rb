@@ -13,10 +13,11 @@ class Waiter
   
 # check item on menu
   def take_order(item)
-     !$menu[item].nil?
+     $menu[item].nil? ? "So sorry we don't have #{item}" : "I will take your order straight to the kitchen"
   end
   
   def place_order(order)
+    "Dear chef can you please prepare this order?"
   end
   
   def serve_order(order)
@@ -36,7 +37,7 @@ end
 
 
 class Customer
-  attr_accessor :mood # don't really want mood up here - need it for testing
+ # attr_accessor :mood # don't really want mood up here - need it for testing - now using instance_variable_set
   attr_reader :order, :mood, :tip
   
   def initialize
@@ -67,23 +68,6 @@ class Customer
   end
 end
 
-
-class Chef
-  def initialize
-  end
-  
-  def cook(item)
-  end
-  
-  def prepare (ingrediant)
-  end
-  
-  def manage(orders)
-  end
-  
-  def ready_order(order)
-  end
-end
 
 class Order
 # something funky going on with the names in here. too many 'orders'

@@ -14,10 +14,6 @@ desc 'Run Minitest Tests'
 Rake::TestTask.new(:test) do |t|
 end
 
-#desc 'Storm test'
-#Rake::TestTask.new(:storm) do |t|
-#end
-
 Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "features --format pretty"
 end

@@ -2,7 +2,6 @@
 
 Before do
   @w=Waiter.new
-  @chef=Chef.new
   @c=Customer.new
 end
 
@@ -102,7 +101,7 @@ Given /^there is a customer who is "(.*)"$/ do |arg1|
    # but since I don;t know how to do that and don't want to spend hours figuring it out
    # since there are not a lot of great examples out there or useful documentation
    # I added a setter for mood (bad idea) just so I can run this test....
-   @c.mood=arg1
+   @c.instance_variable_set(:@mood, arg1)
 end
 
 When /^I greet him with "(.*)"$/ do |arg1|
