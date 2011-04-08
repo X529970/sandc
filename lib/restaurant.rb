@@ -21,6 +21,7 @@ class Waiter
   end
   
   def serve_order(order)
+    "Here's your grub"
   end
   
   def greet
@@ -56,6 +57,7 @@ class Customer
   end
   
   def eat
+    "Nom, nom, nom"
   end
   
   def pay
@@ -72,7 +74,8 @@ end
 class Order
 # something funky going on with the names in here. too many 'orders'
 # probably not a good practice- can cause confusion...
-# refactor later.
+# refactor later. maybe sooner would be better- keep getting into trouble with this bad naming.
+# want to say customer.order when I mean customer.order.items, etc.
   def initialize
     @order =[]
   end
@@ -82,7 +85,7 @@ class Order
   end
 
   def order(item)
-    @order+=[item]
+    @order+=[item.to_sym]
   end
   def cost
     # i imagine there is a better way to do this...

@@ -1,98 +1,49 @@
-#require '~/documents/ruby/sandc/lib/restaurant.rb' # there must be a more appropriate way to require this...
-
 Before do
+# this gets called before each scanario.
   @w=Waiter.new
   @c=Customer.new
 end
 
-Given /^there is a customer$/ do
-   assert @c
-end
-
-Then /^I greet him$/ do
-  # given the random nature of the program, I need to know how to mock to test this
-  # correctly
-  @c.react(@w.greet)# express the regexp above with the code you wish you had
-end
-
-Then /^he is happy$/ do
-  @c.mood # express the regexp above with the code you wish you had
-end
-
-Then /^leaves a big tip after his meal$/ do
-  # express the regexp above with the code you wish you had
-end
-
-Then /^he is unhappy$/ do
-  @c.mood # express the regexp above with the code you wish you had
-end
-
-Then /^leaves a bad tip$/ do
-  # express the regexp above with the code you wish you had
-end
-
-Given /^customer orders "(.*)"$/ do |arg1|
-  @c.request_order(arg1) # express the regexp above with the code you wish you had
+Given /^customer orders "(.*)"$/ do |item|
+  @c.request_order(item) 
 end
 
 When /^waiter checks menu$/ do
-  @w.take_order(@c.order) # express the regexp above with the code you wish you had
+  @c.order.items.each {|item| refute_nil @w.take_order(item.to_sym)   }
 end
 
 When /^its there$/ do
-  true == @w.take_order(@c.order)# express the regexp above with the code you wish you had
+ @c.order.items.each  {|item| assert_equal "I will take your order straight to the kitchen", @w.take_order(item.to_sym)}# express the regexp above with the code you wish you had
+ # take order should be refactored to take an array....
 end
 
 Then /^waiter places order with chef$/ do
- # express the regexp above with the code you wish you had
+  assert_equal "Dear chef can you please prepare this order?", @w.place_order(@c.order.items)
 end
 
-
-Then /^chef cooks "(.*)"$/ do |arg1|
-  # express the regexp above with the code you wish you had
-end
-
-Then /^chef cooks pizza$/ do
-   # express the regexp above with the code you wish you had
-end
-
-Then /^chef readies order$/ do
-  # express the regexp above with the code you wish you had
-end
-
-Then /^waiter delivers order$/ do
-  # express the regexp above with the code you wish you had
+Then /^waiter serves order$/ do
+   assert_equal "Here's your grub", @w.serve_order(@c.order.items)
 end
 
 Then /^customer eats "(.*)"$/ do |arg1|
-  # express the regexp above with the code you wish you had
+    assert_equal "Nom, nom, nom", @c.eat
 end
 
 Then /^waiter gives check$/ do
-  @w.deliver_check(@c) # express the regexp above with the code you wish you had
+  @w.deliver_check(@c) 
+  refute_equal 0.0, @c.order.cost # no order, no check
 end
 
 Then /^customer pays$/ do
-  @c.pay # express the regexp above with the code you wish you had
+  refute_equal 0.0, @c.pay # no dine and dash
 end
 
 Then /^customer leaves$/ do
-   # express the regexp above with the code you wish you had
+   refute_nil @c.leave
 end
 
-When /^its not there$/ do
-   # express the regexp above with the code you wish you had
-end
-
-Then /^waiter tells customer it is not on the menu$/ do
-   # express the regexp above with the code you wish you had
-end
-
-Then /^customer orders something else$/ do
-  @c.request_order(:pizza) # maybe we should remove the bad thing from the order...express the regexp above with the code you wish you had
-end
-Then /^customer had heart set on "(.*)"$/ do |arg1|
- # express the regexp above with the code you wish you had
+When /^waiter tells customer "(.*)" is not there$/ do |arg1|
+ @c.order.items.each{ |item| assert_equal "So sorry we don't have #{item}", ( @w.take_order item)}
 end
 
 Given /^there is a customer who is "(.*)"$/ do |arg1|
@@ -112,5 +63,11 @@ end
 Then /^he is "(.*)"$/ do |arg1|
   @c.react(@ww.greet)
   assert_equal arg1, @c.mood, "wrong mood" # express the regexp above with the code you wish you had
+end
+
+Then /^tip is "(.*)"$/ do |expected_tip|
+  puts expected_tip
+  @c.pay
+  assert_equal expected_tip.to_f, @c.tip #
 end
 
