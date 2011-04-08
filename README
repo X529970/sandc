@@ -1,12 +1,20 @@
-This is the homework assignment as developed and eventually completed by Storm Holloway and Charissa Smith.
+This is the homework assignment as developed and completed by Storm Holloway and Charissa Smith.
 
-We chose to model a restaurant. The three specific elements we focussed on are the Waiter, the Chef and the Customer.
+We chose to model a restaurant. The two specific elements we focussed on are the Waiter and the Customer. The Customer also has an Order.
 
-The first object we modeled is the Waiter.
+OK I think we are done with this little exercise. It is unfortunately not a stellar example of much however it is time to move on to something else (law of diminishing returns and all that...). In addition to learning how to install and configure a bunch of junk and how to communicate with github and work collaboratively, here are some of our lessons learned:
 
-At some point we will look at the interactions between the three, but that is currently beyond our level of understanding.
+- Taking a BDD or TDD approach does not insure good design. For example, a bunch of things that work with an 'order' in this system should deal with an array not just a scalar. Our communications between waiter and customer are not as clean as they could be. Etc. Lot's of stuff could be better.
 
-Some things to note:
+- Naming of things is important (e.g., class Order, instance called order, order.items -- was originally order.order) If you realize you screwed up the naming of something, you should fix it (refactor it) pretty quickly. Regaining the time you will lose making stupid mistakes due to the bad choice should more than make up for the cost of refactoring it early. We still haven't done that.
+
+- if you have tests and they test your PORBs in another file, it doesn't mean your app is going to work. You have to test that too. Or at least run it. Especially if you do a lot of refactoring in the process of making tests. (ours (restuarant_app.rb) actually did work, but that was lucky and it was an afterthought to test it)
+
+- Don't forget to change anything that you want to add to your README before you do a commit. I have a bunch of "paired" commits due to that error
+
+- "cucumber --format usage"    helps you identify unused steps in your steps file
+
+Some other things to note:
 To get minitest to be available to the step definitions we had to:
 - create a support directory under features
 - add an env.rb file to the support directory with these lines
@@ -20,7 +28,7 @@ To have cucumber find the .rb files in lib, we had to:
 - add this line to env.rb
 	require File.join "./" ,"lib" ,"loader.rb"
 	
-	
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	
 Here is the gist of what we have modelled (result of running lib/restaurant_app.rb). If you try to run it yourself you will likely get a different
 result. Be careful because the 'require' assumes you are in the lib/ directory when you run it. I still haven't figured out the best way to make these 
 references...
